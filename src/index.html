@@ -11,16 +11,18 @@
 	<body>
 		<div class="project-window">
 			<div class="project-canvas">
-				<form id="form-todo-list">
+				<form id="todo-list__form">
 					<input
 						id="input__todo-item"
 						type="text"
-						form="form-todo-list"
+						form="todo-list__form"
 						placeholder="Add a todo"
 						required="required"
-                        value=""
-					/><input id="input__add-todo-item" type="button" value="add" onclick="clickFunc()" />
-                    <p id="input__alert-message">Add an item onto your todo list.</p>
+						value=""
+					/><input id="input__add-todo-item" type="submit" value="add" />
+					<p id="input__alert-message">Add an item to your todo list.</p>
+					<div id="todo-list"></div>
+					<input id="todo-list__reset" type="reset" onclick="resetForm()" value="reset">
 				</form>
 			</div>
 		</div>
