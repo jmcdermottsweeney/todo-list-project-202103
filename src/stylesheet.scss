@@ -1,26 +1,31 @@
+* {
+	box-sizing: border-box;
+}
+
 .project-window {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 4em;
-    height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin-top: 4em;
+	height: 100vh;
 }
 
 @media screen and (min-width: 768px) {
-    .project-window {
-        justify-content: center;
-    }
+	.project-window {
+		justify-content: center;
+	}
 }
 
 .project-canvas {
-    min-width: 420px;
-    margin: 0 auto;
-    background: blue;
+	min-width: 420px;
+	margin: 0 auto;
+	padding: 16px;
+	background: blue;
 }
 
 @media screen and (min-width: 768px) {
-    .project-canvas {
-        max-width: 560px;
-    }
+	.project-canvas {
+		max-width: 560px;
+	}
 }

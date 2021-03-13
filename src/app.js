@@ -1,20 +1,14 @@
 class TodoItem {
-    constructor(description, status) {
+    constructor(description) {
         this.description = description;
-        this.status = status;
+        this.status = false;
     }
 
-    getDescription() {
-        let str = this.description.status;
-        if (typeof str !== String) {
-            return alert("Error: Description is not a string");
-        }
-    }
-
-    getStatus() {
-        let bol = this.arr.status;
-        if (typeof bol !== Boolean) {
-            return alert("Error: Status is not a boolean");
+    switchStatus() {
+        if (this.status == false) {
+            this.statis = true;
+        } else {
+            this.status = false;
         }
     }
 }
@@ -24,15 +18,27 @@ class TodoList {
         this.arr = [];
     }
 
-    addItem(newItem) {
+    // add a todo item to the list
+    addTodo(newItem) {
         this.arr.push(newItem);
     }
 
-    removeItem(newItem, i) {
+    // returns the object at index i
+    getTodo(i) {
+        return this.arr[i];
+    }
+
+    // remove a todo item from the list
+    removeTodo(i) {
         this.arr.splice(i, 1);
     }
 
-    seeMyList() {
+    clearList() {
+        this.arr.splice(0);
+    }
+
+    //see all objects in the current array
+    seeList() {
         for (let i = 0; i < this.arr.length; i++) {
             console.log(this.arr[i]);
         }
@@ -40,17 +46,23 @@ class TodoList {
 }
 
 
-let item1 = new TodoItem('Lorem', "Ipsum");
-let item2 = new TodoItem('Hello', "World");
-let item3 = new TodoItem('Be', "Kind");
-
-
+//create a new empty TodoList when the program runs
 let myList = new TodoList();
-myList.addItem(item1);
-myList.addItem(item2);
-myList.addItem(item3);
 
-myList.seeMyList();
+function formVal(pass) {
+    if (pass == "") {
+        return true;
+    } else return false;
+}
 
-
-
+// triggered when the input field is submitted
+function clickFunc() {
+    if (document.getElementById('input__todo-item').value == false) {
+        document.getElementById('input__alert-message').innerHTML = 'Write in your todos';
+    } else {
+        myList.addTodo(new TodoItem(document.getElementById('input__todo-item').value));
+        document.getElementById('input__todo-item').value = '';
+        myList.seeList();
+        console.log("====");
+    }
+}

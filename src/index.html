@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List Project</title>
-    <link rel="stylesheet" href="./stylesheet.css">
-</head>
-<body>
-    <div class="project-window">
-        <div class="project-canvas">
-x
-        </div>
-    </div>
-    <script src="app.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Todo List Project</title>
+		<link rel="stylesheet" href="../node_modules/normalize.css/normalize.css" />
+		<link rel="stylesheet" href="./stylesheet.css" />
+	</head>
+	<body>
+		<div class="project-window">
+			<div class="project-canvas">
+				<form id="form-todo-list">
+					<input
+						id="input__todo-item"
+						type="text"
+						form="form-todo-list"
+						placeholder="Add a todo"
+						required="required"
+                        value=""
+					/><input id="input__add-todo-item" type="button" value="add" onclick="clickFunc()" />
+                    <p id="input__alert-message">Add an item onto your todo list.</p>
+				</form>
+			</div>
+		</div>
+		<script src="app.js"></script>
+	</body>
 </html>
