@@ -49,32 +49,31 @@ class TodoList {
 //create a new empty TodoList when the program runs
 let myList = new TodoList();
 
-let inputTodo = document.getElementById('input__todo-item');
-let alertMsg = document.getElementById('input__alert-message');
+let inputTodo = document.getElementById('todo-list__input');
+let alertMsg = document.getElementById('todo-list__alert-message');
 
 const form = document.getElementById("todo-list__form");
 form.addEventListener('submit', function handleForm(event) {
     event.preventDefault();
-    checkInput();
+    if (checkInput()) {
+        let newTodo = new TodoItem(inputTodo.value.toString().trim());
+        myList.addTodo(newTodo);
+        createTodoNode(newTodo, myList);
+        inputTodo.value = '';
+        console.log(myList.seeList());
+    }
 });
 
 // validates the given input for a todo item is not a blank string,
 // and then creates a new TodoItem and adds it to myList
 function checkInput() {
-    let inputVal = inputTodo.value.trim().toString();
-    if (inputVal == "") {
+    let inputVal = inputTodo.value.toString().trim();
+    if (inputVal == '') {
         alertMsg.innerHTML = 'Please input a valid string.';
+        inputTodo.value = '';
         return false;
     } else {
         alertMsg.innerHTML = 'Add an item onto your todo list.';
-        let newTodo = new TodoItem(inputVal);
-        myList.addTodo(newTodo);
-        createTodoNode(newTodo, myList);
-        inputTodo.value = "";
-
-        myList.seeList();
-        console.log("====");
-
         return true;
     }
 }
@@ -108,18 +107,14 @@ function createTodoNode(todo, list) {
     container.appendChild(checkboxInput);
     container.appendChild(checkboxLabel);
     document.getElementById('todo-list').appendChild(container);
-
 }
 
 // resets the form and removes objects from the myList array
 function resetForm() {
     document.getElementById('todo-list__form').reset();
     myList.clearList();
-    removeChildNodes(document.getElementById('todo-list'));
-
-    function removeChildNodes(parent) {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-        }
+    let parent = document.getElementById('todo-list');
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
     }
 }
