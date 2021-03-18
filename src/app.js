@@ -57,7 +57,7 @@ form.addEventListener('submit', function (event) {
     if (checkInput(userInput)) {
         let newTodo = new TodoItem(userInput.value.toString().trim());
         myList.addTodo(newTodo);
-        createTodoNode(newTodo, myList);
+        createTodoNode('todo-list', newTodo, myList);
         userInput.value = '';
     }
 });
@@ -91,71 +91,20 @@ function resetForm() {
     }
 }
 
+function createTodoNode(id, todo, list) {
+    document.getElementById(id).insertAdjacentHTML('afterbegin',
+    `<div class="todo-item__container">
+        <div class="todo-item__icon-wrapper">
+            <span class="todo-item__check-icon far fa-check-square"></span>
+        </div>
+        <div class="todo-item__input-wrapper">
+            <input id="todo-item__${(list.arr.indexOf(todo) + 1)}" type="checkbox" name="todo" value="what" />
+            <label class="todo-item__label" for="todo-item__0" style="text-decoration: none">${todo.description}</label>
+            <div class="todo-item__delete-wrapper">
+                <a class="todo-item__delete-link" href="#">Remove this item</a>
+            </div>
+        </div>
+    </div>)`);
 
-function createTodoNode(todo, list) {
-    function setAtrb(el, attribute) {
-        for (let key in attribute) {
-            el.setAttribute(key, attribute[key]);
-        }
-    }
-
-    const container = document.createElement('div');
-    setAtrb(container, {'class': 'todo-item__container'});
-
-    // check icon
-    const iconWrapper = document.createElement('div');
-    setAtrb(iconWrapper, {'class': 'todo-item__icon-wrapper'});
-    const checkIcon = document.createElement('span');
-    setAtrb(checkIcon, {'class': 'todo-item__check-icon far fa-check-square'});
-    iconWrapper.appendChild(checkIcon);
-
-    // input
-    const inputWrapper = document.createElement('div');
-    setAtrb(inputWrapper, {'class': 'todo-item__input-wrapper'});
-    const input = document.createElement('input');
-    const id = 'todoItem ' + (list.arr.indexOf(todo) + 1);
-    setAtrb(input, {'id': id, 'type': 'checkbox', 'name': 'todo', 'value': todo.description});
-    const label = document.createElement('label');
-    setAtrb(label, {'class': 'todo-item__label', 'for': id});
-    const description = document.createTextNode(todo.description);
-    label.append(description);
-
-    // delete icon
-    const deleteWrapper = document.createElement('div');
-    setAtrb(deleteWrapper, {'class': 'todo-item__delete-wrapper'});
-    const deleteLink = document.createElement('a');
-    deleteLink.innerHTML = 'Remove this Item';
-
-    setAtrb(deleteLink, {'class': 'todo-item__delete-link', 'href': '#'});
-    deleteWrapper.appendChild(deleteLink);
-    inputWrapper.append(input, label, deleteWrapper);
-
-    container.append(iconWrapper,inputWrapper);
-    document.getElementById('todo-list').appendChild(container);
+    document.getElementByClass
 }
-
-// creates the node elements for a todo item
-// function createTodoNode(todo, list) {
-
-
-//     // delete todo item button
-//     let checkboxDelete = document.createElement('span');
-//     checkboxDelete.classList.add('todo-item__delete');
-
-//     // put together node elements
-//     checkboxLabel.appendChild(description);
-//     container.appendChild(checkboxInput);
-//     container.appendChild(checkboxLabel);
-//     document.getElementById('todo-list').appendChild(container);
-
-//     let lorem = document.getElementById(radioId);
-//     lorem.addEventListener('change', function () {
-//         todo.switchStatus();
-//         if (todo.status) {
-//             checkboxLabel.style.textDecoration = 'line-through';
-//         } else {
-//             checkboxLabel.style.textDecoration = 'none';
-//         }
-//         console.log(todo.status);
-//     });
-// }
