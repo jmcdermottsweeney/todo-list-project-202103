@@ -6,7 +6,7 @@ class TodoItem {
 
     switchStatus() {
         if (this.status == false) {
-            this.statis = true;
+            this.status = true;
         } else {
             this.status = false;
         }
@@ -33,6 +33,7 @@ class TodoList {
         this.arr.splice(i, 1);
     }
 
+    // remove all objects in arr
     clearList() {
         this.arr.splice(0);
     }
@@ -45,32 +46,33 @@ class TodoList {
     }
 }
 
-
 //create a new empty TodoList when the program runs
 let myList = new TodoList();
-
-let inputTodo = document.getElementById('todo-list__input');
 let alertMsg = document.getElementById('todo-list__alert-message');
 
-const form = document.getElementById("todo-list__form");
-form.addEventListener('submit', function handleForm(event) {
+const form = document.getElementById('todo-list__form');
+form.addEventListener('submit', function (event) {
     event.preventDefault();
-    if (checkInput()) {
-        let newTodo = new TodoItem(inputTodo.value.toString().trim());
+    let userInput = document.getElementById('todo-list__input');
+    if (checkInput(userInput)) {
+        let newTodo = new TodoItem(userInput.value.toString().trim());
         myList.addTodo(newTodo);
         createTodoNode(newTodo, myList);
-        inputTodo.value = '';
-        console.log(myList.seeList());
+        userInput.value = '';
     }
 });
 
+let testVar = document.getElementById('test-id');
+testVar.style.textDecoration = 'line-through';
+
+
 // validates the given input for a todo item is not a blank string,
 // and then creates a new TodoItem and adds it to myList
-function checkInput() {
-    let inputVal = inputTodo.value.toString().trim();
+function checkInput(input) {
+    let inputVal = input.value.toString().trim();
     if (inputVal == '') {
         alertMsg.innerHTML = 'Please input a valid string.';
-        inputTodo.value = '';
+        input.value = '';
         return false;
     } else {
         alertMsg.innerHTML = 'Add an item onto your todo list.';
@@ -78,36 +80,6 @@ function checkInput() {
     }
 }
 
-// creates the node elements for a todo item
-function createTodoNode(todo, list) {
-    // div container
-    let container = document.createElement('div');
-    container.classList.add('todo-item__container');
-
-    // create id for input at index n
-    let radioId = 'todo-item__' + (list.arr.indexOf(todo) + 1);
-
-    // checkbox input
-    let checkboxInput = document.createElement('input');
-    checkboxInput.setAttribute('id', radioId);
-    checkboxInput.setAttribute('type', 'checkbox');
-    checkboxInput.setAttribute('name', 'todo');
-    checkboxInput.setAttribute('value', todo.description)
-
-    // checkbox label
-    let checkboxLabel = document.createElement('label');
-    checkboxLabel.classList.add('todo-item__label');
-    checkboxLabel.setAttribute('for', radioId);
-
-    // label description
-    let description = document.createTextNode(todo.description);
-
-    // put together node elements
-    checkboxLabel.appendChild(description);
-    container.appendChild(checkboxInput);
-    container.appendChild(checkboxLabel);
-    document.getElementById('todo-list').appendChild(container);
-}
 
 // resets the form and removes objects from the myList array
 function resetForm() {
@@ -118,3 +90,72 @@ function resetForm() {
         parent.removeChild(parent.firstChild);
     }
 }
+
+
+function createTodoNode(todo, list) {
+    function setAtrb(el, attribute) {
+        for (let key in attribute) {
+            el.setAttribute(key, attribute[key]);
+        }
+    }
+
+    const container = document.createElement('div');
+    setAtrb(container, {'class': 'todo-item__container'});
+
+    // check icon
+    const iconWrapper = document.createElement('div');
+    setAtrb(iconWrapper, {'class': 'todo-item__icon-wrapper'});
+    const checkIcon = document.createElement('span');
+    setAtrb(checkIcon, {'class': 'todo-item__check-icon far fa-check-square'});
+    iconWrapper.appendChild(checkIcon);
+
+    // input
+    const inputWrapper = document.createElement('div');
+    setAtrb(inputWrapper, {'class': 'todo-item__input-wrapper'});
+    const input = document.createElement('input');
+    const id = 'todoItem ' + (list.arr.indexOf(todo) + 1);
+    setAtrb(input, {'id': id, 'type': 'checkbox', 'name': 'todo', 'value': todo.description});
+    const label = document.createElement('label');
+    setAtrb(label, {'class': 'todo-item__label', 'for': id});
+    const description = document.createTextNode(todo.description);
+    label.append(description);
+
+    // delete icon
+    const deleteWrapper = document.createElement('div');
+    setAtrb(deleteWrapper, {'class': 'todo-item__delete-wrapper'});
+    const deleteLink = document.createElement('a');
+    deleteLink.innerHTML = 'Remove this Item';
+
+    setAtrb(deleteLink, {'class': 'todo-item__delete-link', 'href': '#'});
+    deleteWrapper.appendChild(deleteLink);
+    inputWrapper.append(input, label, deleteWrapper);
+
+    container.append(iconWrapper,inputWrapper);
+    document.getElementById('todo-list').appendChild(container);
+}
+
+// creates the node elements for a todo item
+// function createTodoNode(todo, list) {
+
+
+//     // delete todo item button
+//     let checkboxDelete = document.createElement('span');
+//     checkboxDelete.classList.add('todo-item__delete');
+
+//     // put together node elements
+//     checkboxLabel.appendChild(description);
+//     container.appendChild(checkboxInput);
+//     container.appendChild(checkboxLabel);
+//     document.getElementById('todo-list').appendChild(container);
+
+//     let lorem = document.getElementById(radioId);
+//     lorem.addEventListener('change', function () {
+//         todo.switchStatus();
+//         if (todo.status) {
+//             checkboxLabel.style.textDecoration = 'line-through';
+//         } else {
+//             checkboxLabel.style.textDecoration = 'none';
+//         }
+//         console.log(todo.status);
+//     });
+// }

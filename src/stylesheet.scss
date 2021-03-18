@@ -30,8 +30,50 @@
 	}
 }
 
+
+
+
+
+
+
+
+
 .todo-item__container {
-	padding: 0.25em;
+	display: flex;
+	padding: 1em;
 	background: red;
-	margin-bottom: 1em;
+}
+
+.todo-item__input-wrapper {
+	display: block;
+	width: 100%;
+	background: orange;
+	input {
+		display: none;
+		visibility: hidden;
+	}
+}
+
+.todo-item__icon-wrapper {
+	padding-right: 0.5em;
+	background: green;
+}
+
+.todo-item__check-icon {
+	display: inline-block;
+	padding: 2px;
+	background: purple;
+}
+
+.todo-item__custom-checkbox-wrapper {
+	background: orange;
+}
+
+.todo-item__custom-checkbox {
+	// position: absolute;
+	width: 18px;
+	height: 18px;
+	overflow: hidden;
+	border-radius: 4px;
+	background-color: silver;
 }
