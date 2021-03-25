@@ -55,6 +55,7 @@
 
 .todo-item__input-wrapper {
   display: block;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -64,8 +65,8 @@
 }
 
 .todo-item__icon-wrapper {
-  color: #c8c8c8;
   padding-right: 0.5em;
+  color: #c8c8c8;
 }
 
 .todo-item__check-icon {
@@ -76,6 +77,10 @@
 
 .todo-item__check-icon:hover {
   color: #1e1e1e;
+}
+
+.todo-item__label {
+  word-wrap: break-word;
 }
 
 .todo-item__complete {

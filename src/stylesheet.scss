@@ -61,6 +61,7 @@ $red: rgb(246, 53, 69);
 
 .todo-item__input-wrapper {
 	display: block;
+	overflow: hidden;
 	width: 100%;
 	input {
 		display: none;
@@ -69,8 +70,8 @@ $red: rgb(246, 53, 69);
 }
 
 .todo-item__icon-wrapper {
-	color: $gray2;
 	padding-right: 0.5em;
+	color: $gray2;
 }
 
 .todo-item__check-icon {
@@ -80,6 +81,10 @@ $red: rgb(246, 53, 69);
 	&:hover {
 		color: $gray4;
 	}
+}
+
+.todo-item__label {
+	word-wrap: break-word;
 }
 
 .todo-item__complete {
