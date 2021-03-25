@@ -5,8 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Todo List Project</title>
-		<link rel="preconnect" href="https://fonts.gstatic.com"> 
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="../node_modules/normalize.css/normalize.css" />
 		<link rel="stylesheet" href="./stylesheet.css" />
 		<script src="https://kit.fontawesome.com/0a5f4bd316.js" crossorigin="anonymous"></script>
@@ -15,18 +15,20 @@
 		<div class="project-window">
 			<div class="project-canvas">
 				<form id="todo-list__form">
-					<h1 id="test-id">Hello</h1>
-					<input
-						id="todo-list__input"
-						type="text"
-						form="todo-list__form"
-						placeholder="Add a todo"
-						required="required"
-						value=""
-					/><input id="input__add-todo-item" type="submit" value="Add" />
+					<h1 id="test-id">Todo List</h1>
+					<div class="input__wrapper">
+						<input
+							id="todo-list__input"
+							type="text"
+							form="todo-list__form"
+							placeholder="Add a todo"
+							required="required"
+							value=""
+						/><input id="todo-list__form-submit" type="submit" value="Add" />
+					</div>
 					<p id="todo-list__alert-message">Add an item to your todo list.</p>
 					<div id="todo-list"></div>
-					<input id="todo-list__reset" type="reset" onclick="resetForm()" value="Clear" />			
+					<input id="todo-list__reset" type="reset" onclick="resetForm()" value="Clear Todo List" />
 				</form>
 			</div>
 		</div>

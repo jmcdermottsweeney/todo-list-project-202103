@@ -1,5 +1,27 @@
 * {
 	box-sizing: border-box;
+	font-family: "Lexend", Arial, Helvetica, sans-serif;
+}
+
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+$gray1: rgb(240, 240, 240);
+$gray2: rgb(200, 200, 200);
+$gray3: rgb(150, 150, 150);
+$gray4: rgb(30, 30, 30);
+$red: rgb(246, 53, 69);
+
+@mixin clearInputStyle {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+@mixin inputStyle {
+	border: 0 none;
+	border-radius: 4px;
 }
 
 .project-window {
@@ -8,7 +30,6 @@
 	justify-content: flex-start;
 	align-items: center;
 	margin-top: 4em;
-	height: 100vh;
 }
 
 @media screen and (min-width: 768px) {
@@ -21,7 +42,10 @@
 	min-width: 420px;
 	margin: 0 auto;
 	padding: 16px;
-	background: blue;
+	background: $gray1;
+	border: 2px solid $gray2;
+	border-radius: 10px;
+	box-shadow: 0 0.25em 0.75em $gray2;
 }
 
 @media screen and (min-width: 768px) {
@@ -30,24 +54,14 @@
 	}
 }
 
-
-
-
-
-
-
-
-
 .todo-item__container {
 	display: flex;
-	padding: 1em;
-	background: red;
+	padding: 1em 0em 1em 0em;
 }
 
 .todo-item__input-wrapper {
 	display: block;
 	width: 100%;
-	background: orange;
 	input {
 		display: none;
 		visibility: hidden;
@@ -55,25 +69,93 @@
 }
 
 .todo-item__icon-wrapper {
+	color: $gray2;
 	padding-right: 0.5em;
-	background: green;
 }
 
 .todo-item__check-icon {
 	display: inline-block;
 	padding: 2px;
-	background: purple;
+	color: $gray3;
+	&:hover {
+		color: $gray4;
+	}
 }
 
-.todo-item__custom-checkbox-wrapper {
-	background: orange;
+.todo-item__complete {
+	text-decoration: line-through;
+	color: $gray3;
 }
 
-.todo-item__custom-checkbox {
-	// position: absolute;
-	width: 18px;
-	height: 18px;
-	overflow: hidden;
-	border-radius: 4px;
-	background-color: silver;
+.todo-item__incomplete {
+	text-decoration: none;
+	color: $gray4;
+}
+
+.todo-item__delete-link {
+	font-size: 0.8em;
+	text-decoration: none;
+	color: $gray3;
+	&:hover {
+		text-decoration: underline;
+		color: $gray4;
+	}
+}
+
+#todo-list__input {
+	display: block;
+	width: 100%;
+}
+
+// input styling
+
+.input__wrapper {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="reset"] {
+	@include clearInputStyle;
+	@include inputStyle;
+}
+
+input[type="text"] {
+	padding: 5px;
+	border: 2px solid $gray2;
+	&.error__input {
+		border: 2px solid $red;
+	}
+}
+
+input[type="submit"] {
+	cursor: pointer;
+	padding: 10px;
+	margin-left: 1em;
+	background: $gray2;
+	border: 0 none;
+	&:hover {
+		background: $gray3;
+	}
+}
+
+input[type="reset"] {
+	cursor: pointer;
+	padding: 10px;
+	background: none;
+	border: 2px solid $red;
+	color: red;
+	&:hover {
+		background: $red;
+		color: $white;
+	}
+}
+
+#todo-list__alert-message {
+	font-size: 0.8em;
+	color: $gray3;
+	&.error__alert-message {
+		color: $red;
+	}
 }
